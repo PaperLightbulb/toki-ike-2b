@@ -19,6 +19,8 @@ def eval(astNode, env: Environment):
         return evalCallExpr(astNode, env)
     elif type(astNode) == Identifier:
         return evalIdent(astNode, env)
+    elif type(astNode) == FxnDec:
+        return evalFxnDec(astNode, env)
     raise ValueError("Ast node not yet set up for interpritation: " + str(type(astNode)))
 
 def evalPrgrm(program: Program, env):
@@ -46,8 +48,15 @@ def evalBin(binop: BinaryExpression, env):
 def evalIdent(ident, env):
     return env.vars[ident.symbol]
 
-def evalVarDec(dec, env):
+def evalVarDec(dec: VarDec, env):
     return env.declareVar(dec.ident, eval(dec.val, env), dec.constant)
+
+def evalFxnDec(dec: FxnDec, env):
+    print("evalFxnDec")
+    print(dec.name)
+    print(dec.params)
+    print(dec.body)
+    return env.declareFxn(dec.name.value, dec.params, env, dec.body)
 
 def evalCallExpr(expr: CallExpression, env):
     args = []
@@ -67,7 +76,7 @@ def evalCallExpr(expr: CallExpression, env):
         for stmt in fn.body:
             result = eval(stmt, scope)
         return result
-    raise ValueError("cannot call non fxn val")
+    raise ValueError("cannot call non fxn val: ", type(fn), " ", fn.value)
 
 def evalNumBinExpr(left, right, operator):
     l = float(left.value)

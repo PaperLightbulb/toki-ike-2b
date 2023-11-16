@@ -1,3 +1,10 @@
 toki(2 + 2)
 o b li (5 + 5) * 2;
 toki(b)
+
+ilo d(c) {
+    o result li c;
+    c
+}
+
+toki(d(2))

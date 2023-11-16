@@ -20,6 +20,11 @@ class Environment:
         print(varName, " = ", value)
         return value
     
+    def declareFxn(self, name, params, decEnv, body):
+        fn = FxnVal(name, params, decEnv, body)
+        print("fn: ",fn)
+        return decEnv.declareVar(name, fn, True)
+    
     def assignVar(self, varName, value):
         env = self.resolve(varName)
         if varName in env.constants:

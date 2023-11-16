@@ -37,7 +37,7 @@ class Parser:
         if self.at().type == TokenType.LET or self.at().type == TokenType.CONST:
             return self.parseVarDec()
         elif self.at().type == TokenType.FN:
-            return self.parseFnDec()
+            return self.parseFxnDec()
         return self.parseExpression()
     
     def parseExpression(self):
@@ -72,16 +72,17 @@ class Parser:
         self.expect(TokenType.CLOSEBRACE, "Object is missing closing brace")
         return ObjectLiteral(props)
     
-    
     def parseFxnDec(self):
         self.eat()
         name = self.expect(TokenType.IDENTIFIER, "expected identifier following fn")
         args = self.parseArgs()
         params = []
+        print("args:")
         for i in args:
             if type(i) != Identifier:
                 raise ValueError("inside fxn dec params not of type str")
-            params.insert(0,i.symbol)
+            params.insert(0, i.symbol)
+            print(i.symbol)
         self.expect(TokenType.OPENBRACE, "expected fn body followin fn dec")
 
         body = []
@@ -92,6 +93,7 @@ class Parser:
 
         fn = FxnDec(params, name, body)
         return fn
+    
     
     def parseVarDec(self):
         isConstant = (self.eat().type == TokenType.CONST)
@@ -172,7 +174,7 @@ class Parser:
 
         while self.notEof() and self.at().type == TokenType.COMMA:
             self.eat()
-            args.insert(0, self.parseAssignmentExpr())
+            args.append(self.parseAssignmentExpr())
 
         return args
 
