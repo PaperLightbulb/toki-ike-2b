@@ -87,7 +87,7 @@ class Parser:
 
         body = []
         while self.at().type != TokenType.EOF and self.at().type != TokenType.CLOSEBRACE:
-            body.insert(0, self.parseStmt())
+            body.insert(0, self.eat())
         
         self.expect(TokenType.CLOSEBRACE, "close brace expected")
 
