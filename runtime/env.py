@@ -15,6 +15,7 @@ class Environment:
         if varName in self.vars:
             raise ValueError("Cannot create already created var: ", varName)
         self.vars[varName] = value
+        print("var ", varName, " = ", value)
         if constant:
             self.consts[varName] = True
         return value

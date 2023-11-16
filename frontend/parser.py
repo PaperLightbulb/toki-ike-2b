@@ -146,7 +146,6 @@ class Parser:
     def parseCallMemExpr(self):
         member = self.parseMemExpr()
         if self.at().type == TokenType.OPENPAREN:
-            print("parsing call expr")
             return self.parseCallExpr(member)
         return member
         

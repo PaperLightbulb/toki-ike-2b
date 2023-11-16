@@ -1,5 +1,6 @@
 ilo d(c) {
     o v li c + 5;
+    o l li v * 2;
 }
 
 toki(d(d(d(12))))

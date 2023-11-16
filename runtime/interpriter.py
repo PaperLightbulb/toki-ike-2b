@@ -3,6 +3,7 @@ from runtime.values import *
 from runtime.env import *
 from frontend.ast import *
 from frontend.lexer import *
+from frontend.parser import *
 
 def eval(astNode, env: Environment):
     if type(astNode) == NumericLiteral:
@@ -56,6 +57,7 @@ def evalFxnDec(dec: FxnDec, env):
 
 def evalCallExpr(expr: CallExpression, env):
     args = []
+    body = []
     for i in expr.args:
         args.insert(0, eval(i, env))
     fn = eval(expr.caller, env)
@@ -70,7 +72,8 @@ def evalCallExpr(expr: CallExpression, env):
             scope.declareVar(varName, args[i], False)
         result = NullVal()
         for stmt in fn.body:
-            result = eval(stmt, scope)
+            body.append(stmt)
+            result = eval(stmt, env)
         return result.value
     raise ValueError("cannot call non fxn val: ", type(fn), " ", fn.value)
 
