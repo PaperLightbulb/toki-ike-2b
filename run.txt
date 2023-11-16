@@ -3,8 +3,11 @@ o b li (5 + 5) * 2;
 toki(b)
 
 ilo d(c) {
-    o result li c;
+    o v li c;
     c
 }
 
-toki(d(2))
+toki(d(12))
+
+o l li 12;
+toki(l)

@@ -52,24 +52,21 @@ def evalVarDec(dec: VarDec, env):
     return env.declareVar(dec.ident, eval(dec.val, env), dec.constant)
 
 def evalFxnDec(dec: FxnDec, env):
-    print("evalFxnDec")
-    print(dec.name)
-    print(dec.params)
-    print(dec.body)
     return env.declareFxn(dec.name.value, dec.params, env, dec.body)
 
 def evalCallExpr(expr: CallExpression, env):
+    print("evalCallExpr")
     args = []
     for i in expr.args:
         args.insert(0, eval(i, env))
-    fn = eval(expr.calle, env)
+    fn = eval(expr.caller, env)
 
     if type(fn) == NativeFxnVal:
         result = fn.call.args(args, env)
         return result
     elif type(fn) == FxnVal:
         scope = Environment(fn.decEnv)
-        for i in range(0, len(fn.params) -1):
+        for i in range(0, len(fn.params)):
             varName = fn.params[i]
             scope.declareVar(varName, args[i], False)
         result = NullVal()

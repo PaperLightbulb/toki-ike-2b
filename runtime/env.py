@@ -22,7 +22,6 @@ class Environment:
     
     def declareFxn(self, name, params, decEnv, body):
         fn = FxnVal(name, params, decEnv, body)
-        print("fn: ",fn)
         return decEnv.declareVar(name, fn, True)
     
     def assignVar(self, varName, value):
@@ -46,9 +45,9 @@ class Environment:
 
 def createGlobEnv(parent):
     env = Environment(parent)
-    env.declareVar("true", BoolVal(True), True)
-    env.declareVar("false", BoolVal(False), True)
-    env.declareVar("null", NullVal(), True)
+    env.declareVar("a", BoolVal(True), True)
+    env.declareVar("powe", BoolVal(False), True)
+    env.declareVar("ala", NullVal(), True)
 
     env.declareVar("toki", NativeFxnVal(FxnCall(prnList, env)), True)
     env.declareVar("kute", NativeFxnVal(FxnCall(inpt, env)), True)
@@ -56,13 +55,19 @@ def createGlobEnv(parent):
     return env
 
 def prnList(args, env):
+    print("prnlist")
     for i in args:
-        if isfunction(i):
-            print(i(args))
-        if type(i) == NumVal:
-            print(i.value, end="")
+        out = i
+        if isfunction(out):
+            out = out(args)
+
+        if type(out) == NumVal:
+            if type(out.value) == NumVal:
+                print("ins")
+                print(out.value.value)
+            print(out.value, end="")
         else:
-            print(i, end="")
+            print(out, end="")
     print()
     return NullVal()
 

@@ -26,9 +26,9 @@ class BinaryExpression:
         self.operator = operator
 
 class CallExpression:
-    def __init__(self, args, calle):
+    def __init__(self, args, caller):
         self.args = args
-        self.calle = calle
+        self.caller = caller
 
 class MemberExpression:
     def __init__(self, obj, prop, computed: bool):

@@ -77,17 +77,16 @@ class Parser:
         name = self.expect(TokenType.IDENTIFIER, "expected identifier following fn")
         args = self.parseArgs()
         params = []
-        print("args:")
         for i in args:
             if type(i) != Identifier:
                 raise ValueError("inside fxn dec params not of type str")
-            params.insert(0, i.symbol)
-            print(i.symbol)
+            params.append(i.symbol)
         self.expect(TokenType.OPENBRACE, "expected fn body followin fn dec")
 
         body = []
         while self.at().type != TokenType.EOF and self.at().type != TokenType.CLOSEBRACE:
-            body.insert(0, self.eat())
+            body.insert(0, self.parseStmt())
+            print(body[0])
         
         self.expect(TokenType.CLOSEBRACE, "close brace expected")
 
