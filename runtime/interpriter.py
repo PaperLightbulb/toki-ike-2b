@@ -46,7 +46,7 @@ def evalBin(binop: BinaryExpression, env):
     return NullVal()
 
 def evalIdent(ident, env):
-    return env.vars[ident.symbol]
+    return env.lookUpVar(ident.symbol)
 
 def evalVarDec(dec: VarDec, env):
     return env.declareVar(dec.ident, eval(dec.val, env), dec.constant)
