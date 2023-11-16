@@ -90,9 +90,9 @@ def tokenize(srcCode):
             else:
                 raise ValueError("Unrecognized char: " + src[0])
     tokens.append(Token(None, TokenType.EOF))
-    print("Tokens:")
-    for i in tokens:
-        print("value: ", str(i.value), " type: ", str(i.type))
+    #print("Tokens:")
+    #for i in tokens:
+        #print("value: ", str(i.value), " type: ", str(i.type))
     return tokens
         
     

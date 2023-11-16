@@ -86,7 +86,6 @@ class Parser:
         body = []
         while self.at().type != TokenType.EOF and self.at().type != TokenType.CLOSEBRACE:
             body.append(self.parseStmt())
-            print(body[0])
         
         self.expect(TokenType.CLOSEBRACE, "close brace expected")
 
@@ -105,10 +104,7 @@ class Parser:
             return VarDec(NullVal(), False, ident)
         
         self.expect(TokenType.EQUALS, "expeceted equals token ident in var dec")
-        #print("Start")
         dec = VarDec(self.parseExpression(), isConstant, ident)
-        #print("AKLFSJAKLF:")
-        #print(self.at().value)
         
         self.expect(TokenType.SEMI, "var dec must end with semi: " + ident)
         return dec
@@ -146,7 +142,6 @@ class Parser:
     def parseCallMemExpr(self):
         member = self.parseMemExpr()
         if self.at().type == TokenType.OPENPAREN:
-            print("parsing call expr")
             return self.parseCallExpr(member)
         return member
         
