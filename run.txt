@@ -4,7 +4,7 @@ toki(b)
 
 ilo d(c) {
     o v li c;
-    c
+    v
 }
 
 toki(d(d(d(12)+2)+2)+2)
