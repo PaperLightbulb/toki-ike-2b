@@ -7,7 +7,7 @@ ilo d(c) {
     c
 }
 
-toki(d(12))
+toki(d(d(d(12)+2)+2)+2)
 
 o l li 12;
 toki(l)

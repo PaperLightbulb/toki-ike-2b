@@ -17,7 +17,6 @@ class Environment:
         self.vars[varName] = value
         if constant:
             self.consts[varName] = True
-        print(varName, " = ", value)
         return value
     
     def declareFxn(self, name, params, decEnv, body):
@@ -29,7 +28,6 @@ class Environment:
         if varName in env.constants:
             raise ValueError("Cannot reassign constant: ", varName)
         env.vars[varName] = value
-        print(varName, " = ", value)
         return value
     
     def lookUpVar(self, varName):
@@ -55,16 +53,12 @@ def createGlobEnv(parent):
     return env
 
 def prnList(args, env):
-    print("prnlist")
     for i in args:
         out = i
         if isfunction(out):
             out = out(args)
 
         if type(out) == NumVal:
-            if type(out.value) == NumVal:
-                print("ins")
-                print(out.value.value)
             print(out.value, end="")
         else:
             print(out, end="")

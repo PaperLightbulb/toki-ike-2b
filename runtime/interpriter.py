@@ -55,7 +55,6 @@ def evalFxnDec(dec: FxnDec, env):
     return env.declareFxn(dec.name.value, dec.params, env, dec.body)
 
 def evalCallExpr(expr: CallExpression, env):
-    print("evalCallExpr")
     args = []
     for i in expr.args:
         args.insert(0, eval(i, env))
@@ -72,7 +71,7 @@ def evalCallExpr(expr: CallExpression, env):
         result = NullVal()
         for stmt in fn.body:
             result = eval(stmt, scope)
-        return result
+        return result.value
     raise ValueError("cannot call non fxn val: ", type(fn), " ", fn.value)
 
 def evalNumBinExpr(left, right, operator):
