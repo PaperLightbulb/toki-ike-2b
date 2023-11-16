@@ -55,7 +55,6 @@ def evalFxnDec(dec: FxnDec, env):
     return env.declareFxn(dec.name.value, dec.params, env, dec.body)
 
 def evalCallExpr(expr: CallExpression, env):
-    print("vs")
     args = []
     for i in expr.args:
         args.insert(0, eval(i, env))
@@ -69,16 +68,9 @@ def evalCallExpr(expr: CallExpression, env):
         for i in range(0, len(fn.params)):
             varName = fn.params[i]
             scope.declareVar(varName, args[i], False)
-            print("jfdklsafjsd")
-            print(varName)
-            print(scope.lookUpVar(varName).value)
         result = NullVal()
         for stmt in fn.body:
             result = eval(stmt, scope)
-        print("Vs:")
-        for i in scope.vars:
-            print(i.value)
-            print(i)
         return result.value
     raise ValueError("cannot call non fxn val: ", type(fn), " ", fn.value)
 

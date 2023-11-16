@@ -1,13 +1,5 @@
-toki(2 + 2)
-o b li (5 + 5) * 2;
-toki(b)
-
 ilo d(c) {
-    o v li c;
-    v
+    o v li c + 5;
 }
 
-toki(d(d(d(12)+2)+2)+2)
-
-o l li 12;
-toki(l)
+toki(d(d(d(12))))
