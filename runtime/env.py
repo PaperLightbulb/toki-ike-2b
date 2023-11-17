@@ -31,6 +31,21 @@ class Environment:
         env.vars[varName] = value
         return value
     
+    def assignMem(self, memEx, value):
+        path = self.tracePath(memEx)
+        env = self.resolve(path[0])
+        if path[0] in env.consts:
+            raise ValueError("Cannot reassign constant: ", path[0])
+        obj = env.vars[path[0]]
+        path.pop(0)
+        self.assignVar(path[0], self.makeObj(path, obj, value))
+    
+    def makeObj(self, path, obj, value):
+        if not path:
+            return value
+        obj[path.pop(0)] = self.makeObj(path, obj[path[0]], value)
+        return obj
+    
     def tracePath(self, expr):
         path = []
         e = expr
@@ -39,19 +54,6 @@ class Environment:
             e = e.obj
         path.insert(0, e.symbol)
         return path
-    
-    def assignMem(self, memEx, value):
-        path = self.tracePath(memEx)
-        env = self.resolve(path[0])
-        if path[0] in env.consts:
-            raise ValueError("Cannot reassign constant: ", path[0])
-        obj = env.vars[path[0]]
-
-        self.assignVar(path[0], self.makeObj(path, obj, value))
-    
-    def makeObj(self, path, obj, value):
-        path.pop(0)
-        obj.path = value
     
     def getRoot(self, memEx):
         if memEx.obj != memEx:
