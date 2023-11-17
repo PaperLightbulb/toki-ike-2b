@@ -7,6 +7,8 @@ from frontend.lexer import *
 def eval(astNode, env: Environment):
     if type(astNode) == NumericLiteral:
         return NumVal(astNode.value)
+    elif type(astNode) == StringLiteral:
+        return StringVal(astNode.value)
     elif type(astNode) == BinaryExpression:
         return evalBin(astNode, env)
     elif type(astNode) == Program:

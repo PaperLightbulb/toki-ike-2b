@@ -5,6 +5,10 @@ class NumVal:
     def __init__(self, val: float):
         self.value = val
 
+class StringVal:
+    def __init__(self, val: str):
+        self.value = val
+
 class BoolVal:
     def __init__(self, val: bool):
         self.value = val

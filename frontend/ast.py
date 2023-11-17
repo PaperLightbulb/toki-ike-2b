@@ -44,6 +44,10 @@ class NumericLiteral:
     def __init__(self, val: float):
         self.value = val
 
+class StringLiteral:
+    def __init__(self, val: str):
+        self.value = val
+
 class ObjectLiteral:
     def __init__(self, props):
         self.properties = props

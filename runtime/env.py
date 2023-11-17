@@ -49,6 +49,7 @@ def createGlobEnv(parent):
 
     env.declareVar("toki", NativeFxnVal(FxnCall(prnList, env)), True)
     env.declareVar("kute", NativeFxnVal(FxnCall(inpt, env)), True)
+    env.declareVar("kulupu", NativeFxnVal(FxnCall(concatStr, env)), True)
 
     return env
 
@@ -60,6 +61,8 @@ def prnList(args, env):
 
         if type(out) == NumVal:
             print(out.value, end="")
+        elif type(out) == StringVal:
+            print(out.value, end="")
         else:
             print(out, end="")
     print()
@@ -67,3 +70,16 @@ def prnList(args, env):
 
 def inpt(args, env):
     return NumVal(float(input(args[0].value)))
+
+def concatStr(args, env):
+    out = ""
+    for s in args:
+        if isfunction(s):
+            s = s(args)
+
+        if type(s) == StringVal:
+            out += s.value
+        else:
+            print("Cannot concat non string value")
+    
+    return StringVal(out)

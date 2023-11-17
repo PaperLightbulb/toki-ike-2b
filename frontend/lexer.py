@@ -23,6 +23,7 @@ class TokenType(Enum):
     DOT = ".",
     FN = "FN",
     NEWLINE = "NL",
+    STR = "\"",
 
 
 Keywords = {
@@ -71,6 +72,13 @@ def tokenize(srcCode):
             tokens.append(Token(src.pop(0), TokenType.COMMA))
         elif src[0] == '.':
             tokens.append(Token(src.pop(0), TokenType.DOT))
+        elif src[0] == '"':
+            str = ""
+            src.pop(0)
+            while src[0] != '"':
+                str += src.pop(0)
+            src.pop(0)
+            tokens.append(Token(str, TokenType.STR))
         else:
             if src[0].isnumeric():
                 num = ""

@@ -23,3 +23,8 @@ ilo dadFxn(i) {
 }
 
 toki(dadFxn(5))
+
+o str li "this is a message, ";
+
+toki()
+toki(kulupu(str, str, str))

@@ -115,6 +115,8 @@ class Parser:
             return Identifier(self.eat().value)
         elif tk == TokenType.NUMBER:
             return NumericLiteral(float(self.eat().value))
+        elif tk == TokenType.STR:
+            return StringLiteral(self.eat().value)
         elif tk == TokenType.OPENPAREN:
             self.eat()
             value = self.parseExpression()
