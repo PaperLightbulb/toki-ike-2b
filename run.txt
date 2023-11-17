@@ -1,8 +1,14 @@
 ilo d(c) {
     o v li c + 5;
     o l li v * 2;
-    toki(3)
+    toki(l)
     o b li l / 2;
 }
 
 toki(d(d(d(12))))
+
+o m li {
+    Ra: 2,
+};
+
+toki(m:Ra)

@@ -21,6 +21,10 @@ def eval(astNode, env: Environment):
         return evalIdent(astNode, env)
     elif type(astNode) == FxnDec:
         return evalFxnDec(astNode, env)
+    elif type(astNode) == ObjectLiteral:
+        return evalObjExpr(astNode, env)
+    elif type(astNode) == MemberExpression:
+        return evalMemExpr(astNode, env)
     raise ValueError("Ast node not yet set up for interpritation: " + str(type(astNode)))
 
 def evalPrgrm(program: Program, env):
@@ -54,6 +58,20 @@ def evalVarDec(dec: VarDec, env):
 def evalFxnDec(dec: FxnDec, env):
     return env.declareFxn(dec.name.value, dec.params, env, dec.body)
 
+def evalObjExpr(obj: ObjectLiteral, env):
+    object = ObjVal({})
+
+    for p in obj.properties:
+        value = obj.properties[p]
+        if value == None:
+            runtimeVal = env.lookUpVar(p)
+        else:
+            runtimeVal = eval(value, env)
+
+        object.prop[p] = runtimeVal
+    
+    return object
+
 def evalCallExpr(expr: CallExpression, env):
     args = []
     for i in expr.args:
@@ -73,6 +91,13 @@ def evalCallExpr(expr: CallExpression, env):
             result = eval(stmt, scope)
         return result.value
     raise ValueError("cannot call non fxn val: ", type(fn), " ", fn.value)
+
+def evalMemExpr(expr: MemberExpression, env):
+    
+    val = expr
+    obj = env.lookUpVar(val.obj.symbol)
+    val = obj.prop[val.prop.symbol]
+    return eval(val, env)
 
 def evalNumBinExpr(left, right, operator):
     l = float(left.value)

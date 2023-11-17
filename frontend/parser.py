@@ -60,9 +60,9 @@ class Parser:
             key = self.expect(TokenType.IDENTIFIER, "obj literal key expected").value
             if self.at().type == TokenType.COMMA:
                 self.eat()
-                props[key] = NullVal()
+                props[key] = None
             elif self.at().type == TokenType.CLOSEBRACE:
-                props[key] = NullVal()
+                props[key] = None
             else:
                 self.expect(TokenType.COLON, "Expected colon in object")
                 val = self.parseExpression()
@@ -174,10 +174,10 @@ class Parser:
 
     def parseMemExpr(self):
         obj = self.parsePrimary()
-        while self.at().type == TokenType.DOT or self.at().type == TokenType.OPENBRACKET:
+        while self.at().type == TokenType.COLON or self.at().type == TokenType.OPENBRACKET:
             op = self.eat()
             computed: bool
-            if op.type == TokenType.DOT:
+            if op.type == TokenType.COLON:
                 computed = False
                 prop = self.parsePrimary()
                 if type(prop) != Identifier:
