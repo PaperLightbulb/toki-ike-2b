@@ -36,14 +36,10 @@ def evalPrgrm(program: Program, env):
     return lastEval
 
 def evalAssign(node: AssignmentExpr, env):
-    if type(node.assigne) != Identifier and type(node.assigne) != MemberExpression:
+    if type(node.assigne) != Identifier:
         raise ValueError("invalide asignee")
     
     val = eval(node.value, env)
-
-    if type(node.assigne) == MemberExpression:
-        memberEx = varName = node.assigne
-        return env.assignMem(memberEx, val)
 
     varName = node.assigne.symbol
 
