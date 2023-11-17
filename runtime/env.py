@@ -65,13 +65,18 @@ def prnList(args, env):
             print(out.value, end="")
         elif type(out) == BoolVal:
             print(str(out.value).lower(), end="")
+        elif type(out) == NullVal:
+            print("ala", end="")
         else:
             print(out, end="")
     print()
     return NullVal()
 
 def inpt(args, env):
-    return NumVal(float(input(args[0].value)))
+    inpt = input(args[0].value)
+    if is_float(inpt):
+        return NumVal(float(inpt))
+    return StringVal(inpt)
 
 def concatStr(args, env):
     out = ""
@@ -85,3 +90,10 @@ def concatStr(args, env):
             print("Cannot concat non string value")
     
     return StringVal(out)
+
+def is_float(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False

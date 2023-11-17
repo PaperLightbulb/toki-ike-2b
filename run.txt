@@ -5,15 +5,18 @@ ilo d(c) {
     o b li l / 2;
 }
 
+o inp li kute("input a number: ");
+toki(inp * 2)
+
 toki(d(d(d(12))))
 
 o m li {
     Ra: {
-        JK: 2,
+        JK: toki,
     },
 };
 
-toki(m:Ra:JK)
+toki(m:Ra:JK("innerFxn"))
 
 ilo dadFxn(i) {
     o dadObj li {
