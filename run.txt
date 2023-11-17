@@ -14,3 +14,12 @@ o m li {
 };
 
 toki(m:Ra:JK)
+
+ilo dadFxn(i) {
+    o dadObj li {
+        dadVar: i * 2,
+    };
+    o return li dadObj:dadVar;
+}
+
+toki(dadFxn(5))

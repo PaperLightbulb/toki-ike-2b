@@ -93,19 +93,9 @@ def evalCallExpr(expr: CallExpression, env):
     raise ValueError("cannot call non fxn val: ", type(fn), " ", fn.value)
 
 def evalMemExpr(expr: MemberExpression, env):
-    print("JKLAFSJDKL:F")
-    val = expr
-    print(val)
-    
-    print(val.obj.symbol)
-    while (type(val.obj) == MemberExpression):
-        obj = 
-    obj = env.lookUpVar(val.obj.symbol)
-    print(obj)
-    print(val.prop.symbol)
-    val = obj.prop[val.prop.symbol]
-    print(val)
-    return val
+    if type(expr.obj) != MemberExpression:
+        return env.lookUpVar(expr.obj.symbol).prop[expr.prop.symbol]
+    return evalMemExpr(expr.obj, env).prop[expr.prop.symbol]
 
 def evalNumBinExpr(left, right, operator):
     l = float(left.value)
