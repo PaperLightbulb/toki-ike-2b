@@ -26,22 +26,32 @@ class Environment:
     
     def assignVar(self, varName, value):
         env = self.resolve(varName)
-        if varName in env.constants:
+        if varName in env.consts:
             raise ValueError("Cannot reassign constant: ", varName)
         env.vars[varName] = value
         return value
     
+    def tracePath(self, expr):
+        path = []
+        e = expr
+        while type(e) == MemberExpression:
+            path.insert(0, e.prop.symbol)
+            e = e.obj
+        path.insert(0, e.symbol)
+        return path
+    
     def assignMem(self, memEx, value):
-        root = self.getRoot(memEx)
-        env = self.resolve(root)
-        if root in env.constants:
-            raise ValueError("Cannot reassign constant: ", root)
-        old = env.vars[root]
+        path = self.tracePath(memEx)
+        env = self.resolve(path[0])
+        if path[0] in env.consts:
+            raise ValueError("Cannot reassign constant: ", path[0])
+        obj = env.vars[path[0]]
 
-        new = old # get old to be new but with the change in the memEx
-
-        env.vars[root] = new
-        return new
+        self.assignVar(path[0], self.makeObj(path, obj, value))
+    
+    def makeObj(self, path, obj, value):
+        path.pop(0)
+        obj.path = value
     
     def getRoot(self, memEx):
         if memEx.obj != memEx:

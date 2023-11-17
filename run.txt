@@ -16,8 +16,12 @@ o m li {
     },
 };
 
+toki("before: ")
+toki(m:Ra:JK)
+
 m:Ra:JK li 5
 
+toki("after: ")
 toki(m:Ra:JK)
 
 ilo dadFxn(i) {
