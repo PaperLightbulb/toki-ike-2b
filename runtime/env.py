@@ -58,11 +58,13 @@ def prnList(args, env):
         out = i
         if isfunction(out):
             out = out(args)
-
+        
         if type(out) == NumVal:
             print(out.value, end="")
         elif type(out) == StringVal:
             print(out.value, end="")
+        elif type(out) == BoolVal:
+            print(str(out.value).lower(), end="")
         else:
             print(out, end="")
     print()

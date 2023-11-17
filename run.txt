@@ -28,3 +28,18 @@ o str li "this is a message, ";
 
 toki()
 toki(kulupu(str, str, str))
+toki()
+toki()
+toki()
+
+toki("dealing with bools: ")
+
+toki(a en a)
+toki(a en powe)
+toki(a anu powe)
+toki(powe en powe)
+
+toki(1 lili 2)
+toki(5 lili 2)
+toki(1 suli 2)
+toki(5 suli 2)

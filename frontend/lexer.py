@@ -24,6 +24,9 @@ class TokenType(Enum):
     FN = "FN",
     NEWLINE = "NL",
     STR = "\"",
+    MORE = "",
+    LESS = "",
+    SAME = "",
 
 
 Keywords = {
@@ -31,6 +34,11 @@ Keywords = {
     'anteAla' : TokenType.CONST,
     'ilo': TokenType.FN,
     'li': TokenType.EQUALS,
+    'suli': TokenType.BINARYOP,
+    'lili': TokenType.BINARYOP,
+    'sama': TokenType.BINARYOP,
+    'en': TokenType.BINARYOP,
+    'anu': TokenType.BINARYOP,
 }
 
 class Token:

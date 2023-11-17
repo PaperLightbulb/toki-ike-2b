@@ -49,6 +49,8 @@ def evalBin(binop: BinaryExpression, env):
     right = eval(binop.right, env)
     if (type(right) == NumVal and type(left) == NumVal):
         return evalNumBinExpr(left, right, binop.operator)
+    if type(right) == BoolVal and type(left) == BoolVal:
+        return evalBoolBinExpr(left, right, binop.operator)
     return NullVal()
 
 def evalIdent(ident, env):
@@ -99,6 +101,18 @@ def evalMemExpr(expr: MemberExpression, env):
         return env.lookUpVar(expr.obj.symbol).prop[expr.prop.symbol]
     return evalMemExpr(expr.obj, env).prop[expr.prop.symbol]
 
+def evalBoolBinExpr(left, right, operator):
+    l = left.value
+    r = right.value
+    result = False
+    if operator == "sama":
+        result = l == r
+    elif operator == "en":
+        result = l and r
+    elif operator == "anu":
+        result = l or r
+    return BoolVal(result)
+
 def evalNumBinExpr(left, right, operator):
     l = float(left.value)
     r = float(right.value)
@@ -111,6 +125,14 @@ def evalNumBinExpr(left, right, operator):
         result = l * r
     elif operator == "/":
         result = l / r
-    else:
+    elif operator == "%":
         result = l % r
+    elif operator == "suli":
+        result = l > r
+    elif operator == "lili":
+        result = l < r
+    if operator == "sama":
+        result = l == r
+    if type(result) == bool:
+        return BoolVal(result)
     return NumVal(result)

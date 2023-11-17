@@ -133,8 +133,16 @@ class Parser:
         return left
     
     def parseMultiplicative(self):
-        left = self.parseCallMemExpr()
+        left = self.parseBool()
         while self.at().value == "*" or self.at().value == "/" or self.at().value == "%":
+            operator = self.eat().value
+            right = self.parseBool()
+            left = BinaryExpression(left, right, operator)
+        return left
+    
+    def parseBool(self):
+        left = self.parseCallMemExpr()
+        while self.at().value == "en" or self.at().value == "anu" or self.at().value == "suli" or self.at().value == "lili" or self.at().value == "sama":
             operator = self.eat().value
             right = self.parseCallMemExpr()
             left = BinaryExpression(left, right, operator)
