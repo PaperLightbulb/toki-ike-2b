@@ -1,5 +1,6 @@
 from runtime.values import *
 from inspect import isfunction
+from frontend.ast import *
 
 class Environment:
     def __init__(self, parent):
@@ -29,6 +30,23 @@ class Environment:
             raise ValueError("Cannot reassign constant: ", varName)
         env.vars[varName] = value
         return value
+    
+    def assignMem(self, memEx, value):
+        root = self.getRoot(memEx)
+        env = self.resolve(root)
+        if root in env.constants:
+            raise ValueError("Cannot reassign constant: ", root)
+        old = env.vars[root]
+
+        new = old # get old to be new but with the change in the memEx
+
+        env.vars[root] = new
+        return new
+    
+    def getRoot(self, memEx):
+        if memEx.obj != memEx:
+            return memEx.obj
+        return self.getRoot(memEx.obj)
     
     def lookUpVar(self, varName):
         env = self.resolve(varName)

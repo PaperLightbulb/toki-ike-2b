@@ -12,11 +12,13 @@ toki(d(d(d(12))))
 
 o m li {
     Ra: {
-        JK: toki,
+        JK: 2,
     },
 };
 
-toki(m:Ra:JK("innerFxn"))
+m:Ra:JK li 5
+
+toki(m:Ra:JK)
 
 ilo dadFxn(i) {
     o dadObj li {
