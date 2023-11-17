@@ -8,7 +8,9 @@ ilo d(c) {
 toki(d(d(d(12))))
 
 o m li {
-    Ra: 2,
+    Ra: {
+        JK: 2,
+    },
 };
 
-toki(m:Ra)
+toki(m:Ra:JK)

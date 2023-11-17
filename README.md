@@ -1,2 +1,1 @@
-TODO: expressions within fxns working
-TODO: objects
+TODO: objects Withing objects, see interpriter line 100
