@@ -48,9 +48,12 @@ def evalAssign(node: AssignmentExpr, env):
     return env.assignVar(varName, val)
 
 def evalIfStmt(stmt, env):
-    if eval(stmt.qual, env):
-        for ex in stmt.body:
-            eval(ex, env)
+    b = eval(stmt.qual, env)
+    if type(b) == BoolVal:
+        if b.value:
+            print("A")
+            for ex in stmt.body:
+                eval(ex, env)
     return NullVal()
 
 def evalBin(binop: BinaryExpression, env):
