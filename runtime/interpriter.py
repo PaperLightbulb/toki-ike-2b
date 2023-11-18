@@ -29,6 +29,8 @@ def eval(astNode, env: Environment):
         return evalMemExpr(astNode, env)
     elif type(astNode) == IfStmt:
         return evalIfStmt(astNode, env)
+    elif type(astNode) == WhileStmt:
+        return evalWhileStmt(astNode, env)
     raise ValueError("Ast node not yet set up for interpritation: " + str(type(astNode)))
 
 def evalPrgrm(program: Program, env):
@@ -51,8 +53,19 @@ def evalIfStmt(stmt, env):
     b = eval(stmt.qual, env)
     if type(b) == BoolVal:
         if b.value:
-            print("A")
             for ex in stmt.body:
+                eval(ex, env)
+    return NullVal()
+
+def evalWhileStmt(stmt, env):
+    while (True):
+        b = eval(stmt.qual, env)
+        if type(b) == BoolVal:
+            if not b.value:
+                break
+        else:
+            break
+        for ex in stmt.body:
                 eval(ex, env)
     return NullVal()
 

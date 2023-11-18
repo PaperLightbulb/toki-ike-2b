@@ -40,6 +40,9 @@ class Parser:
             return self.parseFxnDec()
         elif self.at().type == TokenType.IF:
             return self.parseIfStmt()
+        elif self.at().type == TokenType.WHILE:
+            print("a")
+            return self.parseWhileStmt()
         return self.parseExpression()
     
     def parseExpression(self):
@@ -108,6 +111,20 @@ class Parser:
         st = IfStmt(qual, body)
         return st
     
+    def parseWhileStmt(self):
+        self.eat()
+        qual = self.parseExpression()
+        self.expect(TokenType.OPENBRACE, "Expected body following if statent")
+
+        body = []
+        while self.at().type != TokenType.EOF and self.at().type != TokenType.CLOSEBRACE:
+            body.append(self.parseStmt())
+        
+        self.expect(TokenType.CLOSEBRACE, "close brace expected")
+
+        st = WhileStmt(qual, body)
+        return st
+    
     
     def parseVarDec(self):
         isConstant = (self.eat().type == TokenType.CONST)
@@ -122,7 +139,7 @@ class Parser:
         self.expect(TokenType.EQUALS, "expeceted equals token ident in var dec")
         dec = VarDec(self.parseExpression(), isConstant, ident)
         
-        self.expect(TokenType.SEMI, "var dec must end with semi: " + ident)
+        #self.expect(TokenType.SEMI, "var dec must end with semi: " + ident)
         return dec
     
     def parsePrimary(self):

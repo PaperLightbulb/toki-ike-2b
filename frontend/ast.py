@@ -19,6 +19,11 @@ class IfStmt:
         self.qual = qual
         self.body = body
 
+class WhileStmt:
+    def __init__(self, qual: bool, body):
+        self.qual = qual
+        self.body = body
+
 class AssignmentExpr:
     def __init__(self, assigne, val):
         self.assigne = assigne

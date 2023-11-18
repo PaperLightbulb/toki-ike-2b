@@ -24,10 +24,11 @@ class TokenType(Enum):
     FN = "FN",
     NEWLINE = "NL",
     STR = "\"",
-    MORE = "",
-    LESS = "",
-    SAME = "",
-    IF = "",
+    MORE = "253253",
+    LESS = "23525",
+    SAME = "523523",
+    IF = "2",
+    WHILE = "3",
 
 
 Keywords = {
@@ -41,6 +42,7 @@ Keywords = {
     'en': TokenType.BINARYOP,
     'anu': TokenType.BINARYOP,
     'seme': TokenType.IF,
+    'sike': TokenType.WHILE,
 }
 
 class Token:
@@ -68,7 +70,7 @@ def tokenize(srcCode):
             tokens.append(Token(src.pop(0), TokenType.OPENBRACKET))
         elif src[0] == ']':
             tokens.append(Token(src.pop(0), TokenType.CLOSEBRACKET))
-        ##elif src[0] == '\n' or src[0] == "\r":
+        #elif src[0] == '\n' or src[0] == "\r":
             #tokens.append(Token(src.pop(0), TokenType.NEWLINE))
         elif src[0] == '+' or src[0] == '-' or src[0] == '*' or src[0] == '/' or src[0] == '%':
             tokens.append(Token(src.pop(0), TokenType.BINARYOP))
@@ -92,7 +94,7 @@ def tokenize(srcCode):
         else:
             if src[0].isnumeric():
                 num = ""
-                while len(src) > 0 and src[0].isnumeric():
+                while len(src) > 0 and (src[0].isnumeric() or src[0] == "."):
                     num = num + src.pop(0)
                 tokens.append(Token(num, TokenType.NUMBER))
             elif src[0].isalpha():
@@ -108,9 +110,8 @@ def tokenize(srcCode):
             else:
                 raise ValueError("Unrecognized char: " + src[0])
     tokens.append(Token(None, TokenType.EOF))
-    #print("Tokens:")
     #for i in tokens:
-        #print("value: ", str(i.value), " type: ", str(i.type))
+        #print(i.type, ":", i.value)
     return tokens
         
     

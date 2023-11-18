@@ -1,15 +1,24 @@
 ilo d(c) {
-    o v li c + 5;
-    o l li v * 2;
+    o v li c + 5
+    o l li v * 2
     toki(l)
-    o b li l / 2;
+    o b li l / 2
 }
 
-o inp li kute("input a number: ");
+toki(3.0)
+
+o inp li kute("input a number: ")
 toki(inp * 2)
 
 seme inp suli 3 {
     toki(inp, "it worked")
+}
+
+toki("loop: ")
+o ba li 1
+sike ba lili 11 {
+    toki(ba)
+    ba li ba + 1
 }
 
 toki(d(d(d(12))))
@@ -18,20 +27,20 @@ o m li {
     Ra: {
         JK: 2,
     },
-};
+}
 
 toki(m:Ra:JK)
 
 ilo dadFxn(i) {
     o dadObj li {
         dadVar: i * 2,
-    };
-    o return li dadObj:dadVar;
+    }
+    o return li dadObj:dadVar
 }
 
 toki(dadFxn(5))
 
-o str li "this is a message, ";
+o str li "this is a message, "
 
 toki()
 toki(kulupu(str, str, str))
