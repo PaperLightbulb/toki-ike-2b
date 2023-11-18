@@ -8,6 +8,10 @@ ilo d(c) {
 o inp li kute("input a number: ");
 toki(inp * 2)
 
+seme inp suli 3 {
+    toki(inp, "it worked")
+}
+
 toki(d(d(d(12))))
 
 o m li {

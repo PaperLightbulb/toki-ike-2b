@@ -38,6 +38,8 @@ class Parser:
             return self.parseVarDec()
         elif self.at().type == TokenType.FN:
             return self.parseFxnDec()
+        elif self.at().type == TokenType.IF:
+            return self.parseIfStmt()
         return self.parseExpression()
     
     def parseExpression(self):
@@ -91,6 +93,20 @@ class Parser:
 
         fn = FxnDec(params, name, body)
         return fn
+    
+    def parseIfStmt(self):
+        self.eat()
+        qual = self.parseExpression()
+        self.expect(TokenType.OPENBRACE, "Expected body following if statent")
+
+        body = []
+        while self.at().type != TokenType.EOF and self.at().type != TokenType.CLOSEBRACE:
+            body.append(self.parseStmt())
+        
+        self.expect(TokenType.CLOSEBRACE, "close brace expected")
+
+        st = IfStmt(qual, body)
+        return st
     
     
     def parseVarDec(self):

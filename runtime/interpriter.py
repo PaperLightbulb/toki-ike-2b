@@ -27,6 +27,8 @@ def eval(astNode, env: Environment):
         return evalObjExpr(astNode, env)
     elif type(astNode) == MemberExpression:
         return evalMemExpr(astNode, env)
+    elif type(astNode) == IfStmt:
+        return evalIfStmt(astNode, env)
     raise ValueError("Ast node not yet set up for interpritation: " + str(type(astNode)))
 
 def evalPrgrm(program: Program, env):
@@ -44,6 +46,12 @@ def evalAssign(node: AssignmentExpr, env):
     varName = node.assigne.symbol
 
     return env.assignVar(varName, val)
+
+def evalIfStmt(stmt, env):
+    if eval(stmt.qual, env):
+        for ex in stmt.body:
+            eval(ex, env)
+    return NullVal()
 
 def evalBin(binop: BinaryExpression, env):
     left = eval(binop.left, env)
@@ -80,7 +88,7 @@ def evalObjExpr(obj: ObjectLiteral, env):
 def evalCallExpr(expr: CallExpression, env):
     args = []
     for i in expr.args:
-        args.insert(0, eval(i, env))
+        args.append(eval(i, env))
     fn = eval(expr.caller, env)
 
     if type(fn) == NativeFxnVal:

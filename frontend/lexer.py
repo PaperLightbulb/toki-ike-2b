@@ -27,6 +27,7 @@ class TokenType(Enum):
     MORE = "",
     LESS = "",
     SAME = "",
+    IF = "",
 
 
 Keywords = {
@@ -39,6 +40,7 @@ Keywords = {
     'sama': TokenType.BINARYOP,
     'en': TokenType.BINARYOP,
     'anu': TokenType.BINARYOP,
+    'seme': TokenType.IF,
 }
 
 class Token:
