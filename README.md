@@ -17,11 +17,11 @@ TODO: obj property reassignment
 - fn() -> fxn call
 - declare obj m with property A = 2
 
-o m li {
+    o m li {
 
-    A: 2,
+        A: 2,
 
-}
+    }
 - kulupu(a, b, c) -> concatinate strings a, b, and c
 - en -> and
 - anu -> or
