@@ -41,7 +41,6 @@ class Parser:
         elif self.at().type == TokenType.IF:
             return self.parseIfStmt()
         elif self.at().type == TokenType.WHILE:
-            print("a")
             return self.parseWhileStmt()
         return self.parseExpression()
     
@@ -112,9 +111,23 @@ class Parser:
         return st
     
     def parseWhileStmt(self):
+        print("a")
         self.eat()
+
+        if self.at().type == TokenType.NUMMOD:
+            self.eat()
+            args = self.parseArgs()
+            self.expect(TokenType.OPENBRACE, "Expected body following for statent")
+
+            body = []
+            while self.at().type != TokenType.EOF and self.at().type != TokenType.CLOSEBRACE:
+                body.append(self.parseStmt())
+        
+            self.expect(TokenType.CLOSEBRACE, "close brace expected")
+
+            return ForStmt(args, body)
         qual = self.parseExpression()
-        self.expect(TokenType.OPENBRACE, "Expected body following if statent")
+        self.expect(TokenType.OPENBRACE, "Expected body following while")
 
         body = []
         while self.at().type != TokenType.EOF and self.at().type != TokenType.CLOSEBRACE:
@@ -122,8 +135,7 @@ class Parser:
         
         self.expect(TokenType.CLOSEBRACE, "close brace expected")
 
-        st = WhileStmt(qual, body)
-        return st
+        return WhileStmt(qual, body)
     
     
     def parseVarDec(self):
@@ -207,11 +219,11 @@ class Parser:
         return args
 
     def parseArgsList(self):
-        args = [self.parseAssignmentExpr()]
+        args = [self.parseStmt()]
 
         while self.notEof() and self.at().type == TokenType.COMMA:
             self.eat()
-            args.append(self.parseAssignmentExpr())
+            args.append(self.parseStmt())
 
         return args
 

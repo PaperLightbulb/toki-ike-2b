@@ -21,6 +21,11 @@ sike ba lili 11 {
     ba li ba + 1
 }
 
+toki("for loop:")
+sike nanpa (o im li 1, im lili 11, im li im + 1) {
+    toki("im li ", im)
+}
+
 toki(d(d(d(12))))
 
 o m li {

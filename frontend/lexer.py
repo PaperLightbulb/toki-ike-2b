@@ -29,6 +29,7 @@ class TokenType(Enum):
     SAME = "523523",
     IF = "2",
     WHILE = "3",
+    NUMMOD = "FJDSKLHLKFD",
 
 
 Keywords = {
@@ -43,6 +44,7 @@ Keywords = {
     'anu': TokenType.BINARYOP,
     'seme': TokenType.IF,
     'sike': TokenType.WHILE,
+    'nanpa': TokenType.NUMMOD
 }
 
 class Token:

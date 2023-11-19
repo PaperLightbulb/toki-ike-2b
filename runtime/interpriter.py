@@ -31,6 +31,8 @@ def eval(astNode, env: Environment):
         return evalIfStmt(astNode, env)
     elif type(astNode) == WhileStmt:
         return evalWhileStmt(astNode, env)
+    elif type(astNode) == ForStmt:
+        return evalForStmt(astNode, env)
     raise ValueError("Ast node not yet set up for interpritation: " + str(type(astNode)))
 
 def evalPrgrm(program: Program, env):
@@ -67,6 +69,23 @@ def evalWhileStmt(stmt, env):
             break
         for ex in stmt.body:
                 eval(ex, env)
+    return NullVal()
+
+
+def evalForStmt(stmt, env):
+    e = Environment(env)
+    eval(stmt.args[0], e)
+    while (True):
+        
+        cond = eval(stmt.args[1], e)
+        if type(cond) == BoolVal:
+            if not cond.value:
+                break
+        else:
+            break
+        for ex in stmt.body:
+            eval(ex, e)
+        eval(stmt.args[2], e)
     return NullVal()
 
 def evalBin(binop: BinaryExpression, env):

@@ -24,6 +24,11 @@ class WhileStmt:
         self.qual = qual
         self.body = body
 
+class ForStmt:
+    def __init__(self, args, body):
+        self.args = args
+        self.body = body
+
 class AssignmentExpr:
     def __init__(self, assigne, val):
         self.assigne = assigne
