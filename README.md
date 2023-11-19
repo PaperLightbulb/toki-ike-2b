@@ -15,7 +15,8 @@ TODO: obj property reassignment
 - sike -> while
 - sike nanpa -> for
 - fn() -> fxn call
-- declare obj m with property A = 2 <-
+- declare obj m with property A = 2
+
 o m li {
 
     A: 2,
