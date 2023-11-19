@@ -71,3 +71,7 @@ class Property:
     def __init__(self, key: str, val):
         self.key = key
         self.value = val
+
+class NotStmt:
+    def __init__(self, val):
+        self.value = val

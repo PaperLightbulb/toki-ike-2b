@@ -7,6 +7,13 @@ from frontend.lexer import *
 def eval(astNode, env: Environment):
     if type(astNode) == NumericLiteral:
         return NumVal(astNode.value)
+    if type(astNode) == NotStmt:
+        val = eval(astNode.value, env)
+        if type(val) != BoolVal:
+            raise ValueError("Cannot invert non bool value")
+        val = val.value
+        val = not val
+        return BoolVal(val)
     elif type(astNode) == StringLiteral:
         return StringVal(astNode.value)
     elif type(astNode) == BinaryExpression:

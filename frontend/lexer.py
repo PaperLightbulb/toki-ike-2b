@@ -30,11 +30,12 @@ class TokenType(Enum):
     IF = "2",
     WHILE = "3",
     NUMMOD = "FJDSKLHLKFD",
+    NOT = "FDSJHKLFGJDS",
 
 
 Keywords = {
     'o' : TokenType.LET,
-    'anteAla' : TokenType.CONST,
+    #'anteAla' : TokenType.CONST,
     'ilo': TokenType.FN,
     'li': TokenType.EQUALS,
     'suli': TokenType.BINARYOP,
@@ -44,7 +45,9 @@ Keywords = {
     'anu': TokenType.BINARYOP,
     'seme': TokenType.IF,
     'sike': TokenType.WHILE,
-    'nanpa': TokenType.NUMMOD
+    'nanpa': TokenType.NUMMOD,
+    'ante' : TokenType.NOT,
+
 }
 
 class Token:

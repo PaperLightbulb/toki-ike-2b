@@ -42,7 +42,13 @@ class Parser:
             return self.parseIfStmt()
         elif self.at().type == TokenType.WHILE:
             return self.parseWhileStmt()
+        elif self.at().type == TokenType.NOT:
+            return self.parseNotStmt()
         return self.parseExpression()
+    
+    def parseNotStmt(self):
+        self.eat()
+        return NotStmt(self.parseStmt())
     
     def parseExpression(self):
         return self.parseAssignmentExpr()
