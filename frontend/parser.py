@@ -117,7 +117,6 @@ class Parser:
         return st
     
     def parseWhileStmt(self):
-        print("a")
         self.eat()
 
         if self.at().type == TokenType.NUMMOD:
