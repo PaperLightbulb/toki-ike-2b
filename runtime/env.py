@@ -32,7 +32,7 @@ class Environment:
         return value
     
     def getRoot(self, memEx):
-        if memEx.obj != memEx:
+        if memEx.obj != MemberExpression:
             return memEx.obj
         return self.getRoot(memEx.obj)
     
