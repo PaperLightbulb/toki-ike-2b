@@ -49,19 +49,27 @@ def evalPrgrm(program: Program, env):
     return lastEval
 
 def evalAssign(node: AssignmentExpr, env):
-    if type(node.assigne) != Identifier or type(node.assigne) != MemberExpression:
-        raise ValueError("invalide asignee")
+    if type(node.assigne) != Identifier and type(node.assigne) != MemberExpression:
+        raise ValueError("invalide asignee: ", type(node.assigne))
     
     path = getPath(node.assigne)
 
     varName = path[len(path) - 1]
     
-    val = getEvalNode(varName, path, node.value, env)
+    val = env.lookUpVar(varName) #getEvalNode(varName, path, node.value, env)
 
     return env.assignVar(varName, val)
 
 def getEvalNode(varName, path, value, env):
+    invertedPath = []
+    for i in path:
+        invertedPath.append(i)
+    invertedPath.pop(0)
     obj = env.lookUpVar(varName)
+    if invertedPath:
+        obj[invertedPath] = value
+    return obj
+
     
     
 
