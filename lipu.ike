@@ -1,0 +1,84 @@
+#
+# toki is how you print out output
+toki("hello 8")
+
+# o x li y creats a variable x and sets it to y
+o ijowan li "hello 8"
+
+# you can also make number variables and do math
+o ijotu li 5
+toki(ijotu + ijotu)
+
+# to reassign a variable, just use li
+ijotu li 9
+toki(ijotu)
+
+# ilo is used to create functions
+ilo ilowan(c) {
+    o v li c + 5
+    o l li v * 2
+    toki(l)
+    o b li l / 2
+}
+
+toki(ilowan(3))
+
+# kute can set a variable to input, either a number or some text
+o inp li kute("input a number: ")
+toki(inp * 2)
+
+# seme will only execute code if the statement following is true, 
+seme inp suli 3 {
+    toki(inp, "it worked")
+}
+
+# sike will loop code while condition is met
+o ba li 1
+sike ba lili 11 {
+    toki(ba)
+    ba li ba + 1
+}
+
+# sike nanpa will do first statement, repeat code while second statment is true
+# while doing third statement each time
+sike nanpa (o im li 1, im lili 11, im li im + 1) {
+    toki("im li ", im)
+}
+
+# you can call functions inside of other functions
+toki(ilowan(ilowan(ilowan(12))))
+
+# creating an object m with property Ra
+o m li {
+    Ra: 3,
+}
+
+# reassigning Ra within m
+m li {
+    Ra: 4,
+}
+toki("Ra li ")
+toki(m:Ra)
+
+# kulupu adds strings together
+o str li "this is a message, "
+toki(kulupu(str, str, str))
+
+
+# true false logic can be done with a and powe
+toki(a en a)
+toki(a en powe)
+toki(a anu powe)
+toki(powe en powe)
+
+toki(1 lili 2)
+toki(5 lili 2)
+toki(1 suli 2)
+toki(5 suli 2)
+
+
+# tenpo waits for the amount of seconds
+tenpo(2)
+
+# it can also wait until key pressed when time is 0
+tenpo(0)

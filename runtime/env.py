@@ -1,6 +1,7 @@
 from runtime.values import *
 from inspect import isfunction
 from frontend.ast import *
+import time
 
 class Environment:
     def __init__(self, parent):
@@ -56,8 +57,23 @@ def createGlobEnv(parent):
     env.declareVar("toki", NativeFxnVal(FxnCall(prnList, env)), True)
     env.declareVar("kute", NativeFxnVal(FxnCall(inpt, env)), True)
     env.declareVar("kulupu", NativeFxnVal(FxnCall(concatStr, env)), True)
+    env.declareVar("tenpo", NativeFxnVal(FxnCall(delay, env)), True)
 
     return env
+
+def delay(args, env):
+    val = args[0]
+    if type(val) == NumVal:
+        if val.value == 0:
+            input()
+        elif val.value < 0:
+            raise ValueError("cannot delay for negative time")
+        else:
+            time.sleep(val.value)
+    elif type(val) == BoolVal:
+        input()
+    else:
+        raise ValueError("Cannot delay for non numeric or boolean value")
 
 def prnList(args, env):
     for i in args:

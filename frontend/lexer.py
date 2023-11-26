@@ -89,6 +89,9 @@ def tokenize(srcCode):
             tokens.append(Token(src.pop(0), TokenType.COMMA))
         elif src[0] == '.':
             tokens.append(Token(src.pop(0), TokenType.DOT))
+        elif src[0] == "#":
+            while not (src[0] == '\n' or src[0] == "\r") and len(src) > 0:
+                src.pop(0)
         elif src[0] == '"':
             str = ""
             src.pop(0)
