@@ -34,12 +34,10 @@ sike nanpa (o im li 1, im lili 11, im li im + 1) {
 toki(d(d(d(12))))
 
 o m li {
-    Ra: {
-        JK: 2,
-    },
+    Ra: 3,
 }
-
-toki(m:Ra:JK)
+toki("Ra li ")
+toki(m:Ra)
 
 ilo dadFxn(i) {
     o dadObj li {
